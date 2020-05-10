@@ -66,8 +66,38 @@ jar {
 
 publishing {
     publications {
-        maven(MavenPublication) {
-            from(components.java)
+        mavenJava(MavenPublication) {
+            from components.java
+            pom {
+                name = 'Typetools'
+                description = 'Typetools for reading lambda metadata'
+                url = 'https://github.com/MinecraftForge/typetools'
+                scm {
+                    url = 'https://github.com/MinecraftForge/typetools'
+                    connection = 'scm:git:git://github.com/MinecraftForge/typetools.git'
+                    developerConnection = 'scm:git:git@github.com:MinecraftForge/typetools.git'
+                }
+                issueManagement {
+                    system = 'github'
+                    url = 'https://github.com/MinecraftForge/typetools/issues'
+                }
+
+                developers {
+                    developer {
+                        id = 'jhalterman'
+                        name = 'jhalterman'
+                    }
+                }
+            }
+        }
+    }
+    repositories {
+        maven {
+            credentials {
+                username project.properties.forgeMavenUser?:'fake'
+                password project.properties.forgeMavenPassword?:'news'
+            }
+            url 'http://files.minecraftforge.net/maven/manage/upload'
         }
     }
 }
